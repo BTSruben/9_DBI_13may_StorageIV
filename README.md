@@ -36,3 +36,25 @@ Verify
 
     Open your browser pointing to http://localhost:8088 and click on Nodes to check them
 
+
+Test commands:
+    
+    Access NameNode
+
+        docker exec -it NAMENODE_CONTAINER_ID bash
+
+    hdfs dfs -df
+    hdfs dfs -ls /
+    hdfs dfs -mkdir -p /user/root/input
+    curl https://sample-videos.com/text/Sample-text-file-1000kb.txt --output loremipsum.txt
+    hdfs dfs -put loremipsum.txt /user/root/input/
+    hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount input output_wordcount
+    hdfs dfs -ls /user/root/output_wordcount/
+    hdfs dfs -cat /user/root/output_wordcount/part-r-00000
+    hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordmean input output_wordmean
+    hdfs dfs -ls /user/root/output_wordmean/
+    hdfs dfs -cat /user/root/output_wordmean/part-r-00000
+    hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordmedian input output_wordmedian
+    hdfs dfs -ls /user/root/output_wordmedian/
+    hdfs dfs -cat /user/root/output_wordmedian/part-r-00000
+
